@@ -859,3 +859,34 @@ a:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+
+/* Fix body background on mobile */
+
+html {
+    min-height: 100%;
+    background-color: #222831;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: #222831;
+    background-image: none;
+    background-repeat: no-repeat;
+}
+
+/* Mobile devices */
+@media (max-width: 600px) {
+    html,
+    body {
+        background-color: #222831;
+    }
+
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+}
+
