@@ -1,642 +1,393 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
+/* ==========================================
+   RESPONSIVE OVERHAUL
+   Mobile / Tablet / Laptop / Desktop / 4K
+   Add this block at the END of your CSS file
+========================================== */
 
-
+/* 1. Global responsive foundation */
 
 :root {
-    --bg-color: #222831;
-    --primary-color: #00adb5;
-    --secondary-color: #393e46;
-    --white-color: #ffffff;
-    --text-color: rgba(238, 238, 238, 0.8);
     --container-width: 1200px;
-    --section-spacing: 6rem;
-    --card-radius: 16px;
-    --transition: 0.3s ease;
+    --section-spacing: clamp(3rem, 6vw, 6rem);
+    --card-radius: clamp(12px, 1.5vw, 18px);
+    --page-gutter: clamp(12px, 3vw, 40px);
 }
 
-* {
-    margin: 0;
-    padding: 0;
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 html {
+    width: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: 30px;
+    scroll-padding-top: clamp(16px, 3vw, 40px);
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--white-color);
-    font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    line-height: 1.7;
-    overflow-x: hidden;
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
 }
 
-img {
-    display: block;
+img,
+svg,
+video {
     max-width: 100%;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
+img {
+    height: auto;
 }
 
 h1,
 h2,
-h3 {
-    line-height: 1.3;
+h3,
+p,
+a,
+li {
+    overflow-wrap: break-word;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+button,
+input,
+textarea,
+select {
+    max-width: 100%;
 }
-
 
 header,
 .hero,
 .aboutme,
 .workcontainer,
 .conatctme {
-    width: min(var(--container-width), calc(100% - 48px));
-    margin-left: auto;
-    margin-right: auto;
+    width: min(
+        var(--container-width),
+        calc(100% - 2 * var(--page-gutter))
+    );
+    min-width: 0;
+    margin-inline: auto;
 }
 
-
+/* 2. Header and navigation */
 
 header {
-    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    padding: 24px 0;
+    gap: clamp(12px, 2vw, 24px);
 }
 
 .logo {
-    color: var(--white-color);
-    font-size: 1.35rem;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: color var(--transition);
+    max-width: 100%;
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
 }
 
-.logo:hover {
-    color: var(--primary-color);
+.navigation {
+    min-width: 0;
+    max-width: 100%;
 }
 
 .navigation ul {
     display: flex;
-    align-items: center;
-    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(10px, 2vw, 32px);
 }
 
 .navigation a {
-    position: relative;
-    color: var(--white-color);
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color var(--transition);
+    font-size: clamp(0.78rem, 1.1vw, 0.95rem);
 }
 
-.navigation a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width var(--transition);
-}
-
-.navigation a:hover {
-    color: var(--primary-color);
-}
-
-.navigation a:hover::after {
-    width: 100%;
-}
-
+/* 3. Hero section */
 
 .hero {
-    display: flex;
+    min-height: clamp(400px, 44vw, 620px);
     align-items: center;
-    justify-content: space-between;
-    gap: 48px;
-    min-height: 560px;
-    padding-top: 40px;
-    padding-bottom: 60px;
-    position: relative;
+    gap: clamp(24px, 5vw, 64px);
+    padding-block: clamp(32px, 5vw, 64px);
 }
 
 .herosub {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
+    gap: clamp(10px, 1.5vw, 16px);
 }
 
 .name {
-    color: var(--white-color);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-size: clamp(1.65rem, 3.5vw, 3rem);
     line-height: 1.25;
+    overflow-wrap: anywhere;
 }
 
 .title {
-    color: var(--primary-color);
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 3.5rem);
     line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
 .hero_img {
-    width: min(46%, 480px);
+    flex: 0 1 46%;
+    width: 46%;
+    max-width: 480px;
+    min-width: 0;
     height: auto;
     object-fit: contain;
 }
 
-.arrow {
-    position: absolute;
-    width: 55px;
-    left: 0;
-    bottom: 35px;
-    opacity: 0.8;
-    pointer-events: none;
-}
-
 .herobtn {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
-    margin-top: 20px;
+    gap: clamp(10px, 1.5vw, 16px);
+    max-width: 100%;
 }
 
 .hireme,
 .cv {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-align: center;
-    transition:
-        background-color var(--transition),
-        color var(--transition),
-        transform var(--transition),
-        box-shadow var(--transition);
+    min-width: 0;
+    max-width: 100%;
+    padding: clamp(10px, 1.2vw, 12px)
+             clamp(14px, 2vw, 24px);
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
 }
 
-.hireme {
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    box-shadow: 0 5px 18px rgba(0, 173, 181, 0.15);
+/* Arrow: responsive size and position */
+
+.arrow {
+    width: clamp(26px, 4vw, 55px);
+    max-width: 12%;
+    height: auto;
+    left: clamp(0px, 1vw, 12px);
+    bottom: clamp(10px, 3vw, 35px);
+    object-fit: contain;
 }
 
-.hireme:hover {
-    background-color: #008f96;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 22px rgba(0, 173, 181, 0.25);
-}
-
-.cv {
-    background-color: var(--secondary-color);
-    color: var(--white-color);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.cv:hover {
-    background-color: #4b525d;
-    transform: translateY(-3px);
-}
-
-.cv img {
-    width: 20px;
-    height: 20px;
-}
-
+/* 4. About section */
 
 .aboutme {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 64px;
-    padding-top: var(--section-spacing);
-    padding-bottom: var(--section-spacing);
+    gap: clamp(24px, 5vw, 64px);
+    padding-block: var(--section-spacing);
 }
 
 .aboutimg {
-    width: min(44%, 440px);
+    flex: 0 1 44%;
+    width: 44%;
+    max-width: 440px;
+    min-width: 0;
     height: auto;
     object-fit: contain;
 }
 
 .aboutmetext {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    flex: 1;
+    flex: 1 1 0;
     min-width: 0;
+    gap: clamp(16px, 2.5vw, 24px);
 }
 
 .aboutmeheading {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-}
-
-.aboutname,
-.abouttitle {
-    font-weight: 700;
-}
-
-.aboutname {
-    color: var(--white-color);
-}
-
-.abouttitle {
-    color: var(--primary-color);
+    font-size: clamp(1.7rem, 3.5vw, 3rem);
+    line-height: 1.25;
 }
 
 .bulb-img {
-    width: 40px;
+    width: clamp(24px, 3.5vw, 40px);
     height: auto;
-    margin-left: 8px;
 }
 
 .aboutmepar {
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: clamp(0.88rem, 1.2vw, 1rem);
     line-height: 1.9;
-    text-align: justify;
+    overflow-wrap: anywhere;
 }
 
-
-
-
-/* =========================
-   Portfolio Projects Gallery
-========================= */
+/* 5. Portfolio section */
 
 .work {
-    position: relative;
-    margin: 4rem 0;
-    padding: 5rem 24px;
-    background-image: url("assets/svg/background.svg");
+    margin-block: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(2.5rem, 6vw, 5rem)
+             var(--page-gutter);
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
 }
 
 .workcontainer {
-    width: min(1200px, 100%);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    width: 100%;
+    max-width: var(--container-width);
+    gap: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .projecttitle {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
     gap: 8px;
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    line-height: 1.25;
 }
 
 .projecttitle h1 {
     font-size: inherit;
-    line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
-/* Projects grid */
-
-.listwork {
+.listwork,
+.listwork ul {
     width: 100%;
+    min-width: 0;
 }
 
 .listwork ul {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+    gap: clamp(12px, 2vw, 24px);
     align-items: stretch;
-    list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .listwork li {
+    position: relative;
+    width: 100%;
     min-width: 0;
-    height: 260px;
+    height: auto;
+    aspect-ratio: 1.2 / 1;
     padding: 0;
-    overflow: hidden;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(57, 62, 70, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 18px;
-
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-
-    transition:
-        transform 0.3s ease,
-        border-color 0.3s ease,
-        box-shadow 0.3s ease;
+    border-radius: var(--card-radius);
 }
-
-.listwork li:hover {
-    transform: translateY(-6px);
-    border-color: rgba(0, 173, 181, 0.65);
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
-}
-
-/* Make the whole card clickable */
 
 .listwork li a {
-    width: 100%;
-    height: 100%;
-    padding: 24px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    padding: clamp(10px, 2vw, 24px);
 }
-
-/* Keep logos and project images proportional */
 
 .listwork li img {
     display: block;
     width: 100%;
     height: 100%;
+    min-width: 0;
+    min-height: 0;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
     object-position: center;
-
-    transition: transform 0.3s ease;
 }
 
-.listwork li:hover img {
-    transform: scale(1.04);
-}
-
-/* Tablet */
-
-@media (max-width: 1023px) {
-    .work {
-        padding: 4rem 20px;
-    }
-
-    .listwork ul {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-    }
-
-    .listwork li {
-        height: 240px;
-    }
-}
-
-/* Mobile */
-
-@media (max-width: 600px) {
-    .work {
-        padding: 3rem 16px;
-    }
-
-    .workcontainer {
-        gap: 1.8rem;
-    }
-
-    .projecttitle {
-        justify-content: center;
-        font-size: 2rem;
-    }
-
-    .listwork ul {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 18px;
-    }
-
-    .listwork li {
-        height: 230px;
-    }
-
-    .listwork li a {
-        padding: 20px;
-    }
-}
-
-
+/* 6. Contact section */
 
 .conatctme {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 36px;
-    padding-top: var(--section-spacing);
-    padding-bottom: var(--section-spacing);
+    gap: clamp(24px, 4vw, 36px);
+    padding-block: var(--section-spacing);
 }
 
 .conatcttitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
     gap: 8px;
-    font-size: clamp(2rem, 4vw, 3rem);
-}
-
-.conatcttitle h1 {
-    font-size: inherit;
+    font-size: clamp(1.7rem, 3.5vw, 3rem);
+    text-align: center;
 }
 
 .contact {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 48px;
     width: 100%;
+    gap: clamp(20px, 4vw, 48px);
 }
 
 .emailandphone {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
+    max-width: 100%;
     min-width: 0;
+    gap: clamp(8px, 1.2vw, 14px);
 }
 
 .emailandphone img {
-    width: 30px;
-    height: 30px;
+    flex: 0 0 auto;
+    width: clamp(22px, 2.5vw, 30px);
+    height: clamp(22px, 2.5vw, 30px);
     object-fit: contain;
 }
 
 .contact h3,
 .contact a {
-    color: var(--white-color);
-    font-size: 0.95rem;
-    font-weight: 500;
+    min-width: 0;
+    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
     overflow-wrap: anywhere;
+    word-break: normal;
 }
-
-.emailandphone a:hover {
-    color: var(--primary-color);
-}
-
 
 .sociallinks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding: 16px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 50px;
-    background-color: rgba(57, 62, 70, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    max-width: 100%;
+    gap: clamp(8px, 1.5vw, 16px);
+    padding: clamp(10px, 1.5vw, 16px)
+             clamp(12px, 2vw, 24px);
 }
 
 .sociallinks a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    transition:
-        background-color var(--transition),
-        transform var(--transition);
-}
-
-.sociallinks a:hover {
-    background-color: rgba(0, 173, 181, 0.15);
-    transform: translateY(-4px);
+    flex: 0 0 auto;
+    width: clamp(34px, 3.5vw, 42px);
+    height: clamp(34px, 3.5vw, 42px);
 }
 
 .sociallinks img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
+    width: clamp(19px, 2vw, 24px);
+    height: clamp(19px, 2vw, 24px);
 }
 
-
 footer {
-    padding: 28px 24px;
-    color: var(--text-color);
-    text-align: center;
+    padding: clamp(20px, 3vw, 28px) var(--page-gutter);
 }
 
 footer p {
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-size: clamp(0.78rem, 1vw, 0.9rem);
+    overflow-wrap: anywhere;
 }
 
+/* ==========================================
+   Small laptops and large tablets
+   ========================================== */
 
-
-@media (max-width: 1023px) {
-    :root {
-        --section-spacing: 4rem;
-    }
-
-    header,
-    .hero,
-    .aboutme,
-    .workcontainer,
-    .conatctme {
-        width: min(100% - 40px, 800px);
-    }
-
+@media (max-width: 1024px) {
     .hero {
-        min-height: auto;
-        gap: 32px;
+        min-height: 0;
+        gap: 28px;
     }
 
     .hero_img {
-        width: 42%;
+        flex-basis: 43%;
+        width: 43%;
     }
 
     .aboutme {
-        gap: 36px;
+        gap: 32px;
     }
 
     .aboutimg {
+        flex-basis: 40%;
         width: 40%;
-    }
-
-    .aboutmepar {
-        font-size: 0.95rem;
-    }
-
-    .work {
-        padding: 70px 20px;
     }
 
     .listwork ul {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
     }
 
-    .listwork li a {
-        min-height: 220px;
+    .listwork li {
+        aspect-ratio: 1.25 / 1;
     }
 
-    .contact {
-        gap: 28px;
+    .arrow {
+        width: clamp(28px, 4vw, 44px);
     }
 }
 
+/* ==========================================
+   Tablets and large phones
+   ========================================== */
 
-
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     :root {
-        --section-spacing: 3rem;
-    }
-
-    header,
-    .hero,
-    .aboutme,
-    .workcontainer,
-    .conatctme {
-        width: calc(100% - 32px);
+        --page-gutter: 24px;
+        --section-spacing: clamp(2.5rem, 7vw, 4rem);
     }
 
     header {
-        flex-direction: column;
         justify-content: center;
-        gap: 18px;
-        padding: 22px 0;
-    }
-
-    .logo {
-        font-size: 1.2rem;
+        gap: 16px;
+        padding-block: 20px;
     }
 
     .navigation {
@@ -644,52 +395,133 @@ footer p {
     }
 
     .navigation ul {
+        gap: 12px 22px;
+    }
+
+    .hero {
+        min-height: 0;
+        gap: 24px;
+        padding-block: 32px 55px;
+    }
+
+    .name {
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+    }
+
+    .title {
+        font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+    }
+
+    .hero_img {
+        flex-basis: 40%;
+        width: 40%;
+    }
+
+    .aboutme {
+        gap: 28px;
+    }
+
+    .aboutmeheading {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
+
+    .aboutmepar {
+        text-align: start;
+    }
+
+    .work {
+        padding-block: 3.5rem;
+    }
+
+    .listwork li {
+        aspect-ratio: 1.15 / 1;
+    }
+
+    .contact {
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px 20px;
+    }
+
+    .arrow {
+        bottom: 12px;
+        width: 32px;
+    }
+}
+
+/* ==========================================
+   Mobile phones
+   ========================================== */
+
+@media (max-width: 600px) {
+    :root {
+        --page-gutter: 16px;
+        --section-spacing: 3rem;
+    }
+
+    header {
+        flex-direction: column;
+        padding-block: 18px;
+        gap: 16px;
+    }
+
+    .logo {
+        text-align: center;
+        white-space: normal;
+        font-size: 1.15rem;
+    }
+
+    .navigation ul {
+        justify-content: center;
+        gap: 12px 16px;
     }
 
     .navigation a {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
     }
 
     .hero {
         flex-direction: column-reverse;
-        justify-content: center;
+        align-items: center;
         text-align: center;
-        gap: 28px;
-        padding-top: 30px;
-        padding-bottom: 45px;
-    }
-
-    .hero_img {
-        width: min(100%, 330px);
+        gap: 22px;
+        padding-block: 24px 40px;
     }
 
     .herosub {
-        align-items: center;
         width: 100%;
+        align-items: center;
     }
 
     .name {
-        font-size: clamp(1.8rem, 7vw, 2.4rem);
+        font-size: clamp(1.55rem, 6vw, 2.2rem);
     }
 
     .title {
-        font-size: clamp(1.7rem, 7vw, 2.5rem);
-        overflow-wrap: anywhere;
+        font-size: clamp(1.65rem, 7vw, 2.5rem);
+    }
+
+    .hero_img {
+        flex: 0 1 auto;
+        width: min(80%, 320px);
+        max-width: 100%;
+        max-height: 38vh;
+        object-fit: contain;
     }
 
     .herobtn {
         justify-content: center;
-        gap: 12px;
+        width: 100%;
+        gap: 10px;
     }
 
     .hireme,
     .cv {
-        padding: 11px 18px;
-        font-size: 0.85rem;
+        padding: 11px 16px;
+        font-size: 0.84rem;
     }
+
+    /* Hide the decorative arrow on narrow screens
+       to prevent overlap with text and buttons. */
 
     .arrow {
         display: none;
@@ -697,86 +529,92 @@ footer p {
 
     .aboutme {
         flex-direction: column-reverse;
-        gap: 32px;
+        align-items: center;
+        gap: 26px;
         text-align: center;
     }
 
     .aboutimg {
-        width: min(100%, 330px);
+        flex: 0 1 auto;
+        width: min(85%, 330px);
+        max-width: 100%;
     }
 
     .aboutmetext {
-        align-items: center;
         width: 100%;
+        align-items: center;
+        gap: 18px;
     }
 
     .aboutmeheading {
         justify-content: center;
-        font-size: 2rem;
+        font-size: clamp(1.65rem, 6vw, 2.1rem);
     }
 
     .bulb-img {
-        width: 30px;
+        width: 28px;
     }
 
     .aboutmepar {
+        width: 100%;
         font-size: 0.9rem;
-        line-height: 1.9;
-        text-align: left;
+        line-height: 1.85;
+        text-align: start;
     }
 
     .work {
-        margin: 25px 0;
-        padding: 55px 16px;
+        margin-block: 20px;
+        padding: 40px var(--page-gutter);
     }
 
     .workcontainer {
-        gap: 28px;
+        gap: 24px;
     }
 
     .projecttitle {
         justify-content: center;
-        font-size: 1.8rem;
+        text-align: center;
+        font-size: clamp(1.55rem, 6vw, 2rem);
     }
 
     .listwork ul {
         grid-template-columns: minmax(0, 1fr);
-        gap: 18px;
+        gap: 16px;
+    }
+
+    .listwork li {
+        aspect-ratio: 1.25 / 1;
+        border-radius: 14px;
     }
 
     .listwork li a {
-        min-height: 210px;
+        padding: 16px;
     }
 
     .listwork li img {
-        height: 170px;
+        width: 100%;
+        height: 100%;
     }
 
     .conatctme {
-        gap: 28px;
+        gap: 24px;
     }
 
     .conatcttitle {
-        font-size: 2rem;
+        font-size: clamp(1.6rem, 6vw, 2rem);
     }
 
     .contact {
+        width: 100%;
+        max-width: 100%;
         flex-direction: column;
         align-items: flex-start;
-        gap: 22px;
-        width: fit-content;
-        max-width: 100%;
+        gap: 18px;
     }
 
     .emailandphone {
+        width: 100%;
         justify-content: flex-start;
-        gap: 12px;
-    }
-
-    .emailandphone img {
-        width: 25px;
-        height: 25px;
-        flex-shrink: 0;
     }
 
     .contact h3,
@@ -785,44 +623,34 @@ footer p {
     }
 
     .sociallinks {
-        gap: 10px;
-        padding: 12px 16px;
-    }
-
-    .sociallinks a {
-        width: 38px;
-        height: 38px;
-    }
-
-    footer {
-        padding: 22px 16px;
+        align-self: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-radius: 24px;
     }
 }
 
-/* =========================
-   10. Very Small Screens
-========================= */
+/* ==========================================
+   Extra-small phones
+   ========================================== */
 
-@media (max-width: 360px) {
-    header,
-    .hero,
-    .aboutme,
-    .workcontainer,
-    .conatctme {
-        width: calc(100% - 24px);
+@media (max-width: 380px) {
+    :root {
+        --page-gutter: 12px;
+        --section-spacing: 2.5rem;
     }
 
     .navigation ul {
-        gap: 10px;
+        gap: 10px 12px;
     }
 
     .navigation a {
-        font-size: 0.78rem;
+        font-size: 0.76rem;
     }
 
     .herobtn {
         flex-direction: column;
-        width: 100%;
+        align-items: stretch;
     }
 
     .hireme,
@@ -830,8 +658,21 @@ footer p {
         width: 100%;
     }
 
+    .hero_img {
+        width: min(85%, 280px);
+        max-height: 32vh;
+    }
+
     .aboutmeheading {
-        font-size: 1.7rem;
+        font-size: 1.55rem;
+    }
+
+    .listwork li {
+        aspect-ratio: 1 / 0.85;
+    }
+
+    .listwork li a {
+        padding: 12px;
     }
 
     .emailandphone {
@@ -844,18 +685,68 @@ footer p {
     }
 }
 
+/* ==========================================
+   Very wide screens
+   ========================================== */
 
+@media (min-width: 1600px) {
+    :root {
+        --container-width: 1320px;
+    }
 
-a:focus-visible {
+    .hero {
+        gap: 72px;
+    }
+
+    .hero_img {
+        max-width: 520px;
+    }
+
+    .listwork ul {
+        gap: 28px;
+    }
+}
+
+/* ==========================================
+   Short screens / landscape phones
+   ========================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 0;
+        padding-block: 24px 40px;
+    }
+
+    .hero_img {
+        max-height: 65vh;
+        width: auto;
+        max-width: 40%;
+    }
+
+    .arrow {
+        width: 26px;
+        bottom: 6px;
+    }
+}
+
+/* ==========================================
+   Accessibility and reduced motion
+   ========================================== */
+
+a:focus-visible,
+button:focus-visible {
     outline: 2px solid var(--primary-color);
-    outline-offset: 5px;
+    outline-offset: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
     *,
     *::before,
     *::after {
-        scroll-behavior: auto !important;
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
